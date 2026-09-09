@@ -1,15 +1,12 @@
 import { useState, type ChangeEvent } from "react";
 import { Button, TextField } from "@mui/material";
-import { textIdPattern } from "../../../shared/lib/validation";
 
 export function AddItemField() {
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const next = e.target.value;
-    if (!textIdPattern.test(next)) return;
-    setValue(next);
+    setValue(e.target.value);
     if (error) setError("");
   };
 
@@ -25,14 +22,14 @@ export function AddItemField() {
     <div className="add-control-panel">
       <TextField
         className="add-control-panel__input"
-        type="text"
-        label="Только буквы и цифры"
+        type="number"
+        label="Только цифры"
         variant="outlined"
         value={value}
         onChange={handleChange}
         error={Boolean(error)}
         helperText={error || " "}
-        slotProps={{ htmlInput: { minLength: 1, maxLength: 100 } }}
+        slotProps={{ htmlInput: { min: 1 } }}
       />
       <Button
         className="add-control-panel__button"
