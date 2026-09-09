@@ -1,0 +1,63 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+  height: 100vh;
+  box-sizing: border-box;
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+
+  &__input {
+    flex: 1;
+  }
+}
+
+.add-control-panel {
+  display: flex;
+  flex-direction: row;
+  gap: 12px;
+  align-items: flex-start;
+
+  &__input {
+    width: 100%;
+  }
+
+  &__button {
+    flex-shrink: 0;
+    height: 56px;
+  }
+}
+
+.panels {
+  display: flex;
+  flex-direction: row;
+  gap: 16px;
+  flex: 1;
+  min-height: 0;
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  border: 1px solid #ddd;
+  border-radius: 12px;
+  padding: 12px;
+  min-height: 0;
+
+  &__list {
+    flex: 1;
+    overflow-y: auto;
+    min-height: 0;
+  }
+
+  &__more {
+    flex-shrink: 0;
+  }
+}
