@@ -1,4 +1,4 @@
-import { addItems } from "../application/add-items.js";
+import { addItem } from "../application/add-items.js";
 
 const pending = new Set<number>();
 
@@ -12,7 +12,7 @@ export function flushAdds() {
   pending.clear();
 
   for (const id of batch) {
-    addItems(id);
+    addItem(id);
   }
 }
 

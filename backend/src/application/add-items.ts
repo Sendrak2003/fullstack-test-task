@@ -1,6 +1,6 @@
 import { MAX_BASE_ID, extraId, selected } from "../infrastructure/item.js";
 
-export const addItems = ( id: number ) => {
+export const addItem = ( id: number ) => {
     if (
       !Number.isInteger(id) || id <= 0 || id <= MAX_BASE_ID ||
       selected.has(id) || extraId.includes(id)
