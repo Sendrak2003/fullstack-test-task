@@ -1,21 +1,35 @@
 import { useState, type ChangeEvent } from "react";
 import { Button, TextField } from "@mui/material";
 
-export function AddItemField() {
+interface AddItemFieldProps {
+  onAdd: (id: number) => Promise<void>;
+}
+
+export function AddItemField({ onAdd }: AddItemFieldProps) {
   const [value, setValue] = useState("");
   const [error, setError] = useState("");
+  const [queued, setQueued] = useState(false);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value);
     if (error) setError("");
+    if (queued) setQueued(false);
   };
 
   const handleAdd = () => {
-    if (value.trim() === "") {
-      setError("Введите значение");
+    const id = Number(value);
+    if (!Number.isInteger(id) || id <= 1_000_000) {
+      setError("ID должен быть больше 1 000 000");
       return;
     }
-    setValue("");
+    void onAdd(id)
+      .then(() => {
+        setValue("");
+        setQueued(true);
+      })
+      .catch(() => {
+        setError("Не удалось добавить элемент");
+      });
   };
 
   return (
@@ -23,7 +37,7 @@ export function AddItemField() {
       <TextField
         className="add-control-panel__input"
         type="number"
-        label="Только цифры"
+        label="ID больше 1 000 000"
         variant="outlined"
         value={value}
         onChange={handleChange}
@@ -38,6 +52,7 @@ export function AddItemField() {
       >
         Добавить
       </Button>
+      {queued && <span>В очереди</span>}
     </div>
   );
 }
