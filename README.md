@@ -52,4 +52,10 @@
   docker compose up --build -d
 ```
 
-### Деплой -
+### Деплой 
+
+ ```
+  https://fullstacktest-e56p0jf3.b4a.run/
+``` 
+
+### ВНИМАНИЕ!! Для достопу возможно потребуется VPN
