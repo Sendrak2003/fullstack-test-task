@@ -1,8 +1,8 @@
 import express from "express";
 import { getAvailablePage } from "../../application/get-available-page.js";
 import { getSelectedPage } from "../../application/get-selected-page.js";
-import { reorderSelected } from "../../application/reorder.js";
 import { enqueueAdd } from "../../infrastructure/add-queue.js";
+import { enqueueReorder } from "../../infrastructure/reorder-queue.js";
 import { enqueueSelection } from "../../infrastructure/selection-queue.js";
 
 export const apiRouter = express.Router();
@@ -43,9 +43,6 @@ apiRouter.post("/selection", express.json(), (req, res) => {
 
 apiRouter.post("/order", express.json(), (req, res) => {
   const { movedId, afterId } = req.body ?? {};
-  const result = reorderSelected({
-    movedId: Number(movedId),
-    afterId: afterId == null ? null : Number(afterId),
-  });
-  res.status("error" in result ? 400 : 200).json(result);
+  enqueueReorder(Number(movedId), afterId == null ? null : Number(afterId));
+  res.json({ queued: true });
 });
