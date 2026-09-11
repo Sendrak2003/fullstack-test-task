@@ -55,7 +55,5 @@
 ### Деплой 
 
  ```
-  https://fullstacktest-e56p0jf3.b4a.run/
-``` 
-
-### ВНИМАНИЕ!! Для достопу возможно потребуется VPN
+  https://newark-seminar-laundry-powerpoint.trycloudflare.com
+```
